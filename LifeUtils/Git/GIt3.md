@@ -4,6 +4,7 @@
 问题：
 
     fatal：refusing to merge unrelated histories
+![无法合并](./.img/GIt3MergeProblem.png)
 解决方法：
 
     git pull origin master --allow-unrelated-history
