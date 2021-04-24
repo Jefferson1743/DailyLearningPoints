@@ -1,5 +1,16 @@
 # markdown结合HTML标签使用语法
+
 [toc]
+
+## 链接自动转换
+
+语法：
+
+    <www.baidu.com>
+
+样例：
+
+<https://www.baidu.com>
 ## 设置字体
 
 语法：
@@ -93,12 +104,19 @@ Nike<sup>TM</sup>
 样例：
 
 <em>斜体</em>
+
 <i>斜体</i>
+
 *斜体*
+
 _斜体_
+
 <strong>加粗</strong>
+
 <b>加粗</b>
+
 **加粗**
+
 __加粗__
 
 ### 引用
@@ -110,6 +128,7 @@ __加粗__
     > 李商隐说:庄生晓梦迷蝴蝶。望帝春心托杜鹃。
 
 样例：
+
 <q>李商隐说:庄生晓梦迷蝴蝶。望帝春心托杜鹃。</q>
 <blockquote>李商隐说:庄生晓梦迷蝴蝶。望帝春心托杜鹃。</blockquote>
 
@@ -256,7 +275,9 @@ __加粗__
     <a href = "https://www.github.com"><img src = "https://github.com/images/modules/contact/heartocat.png" width = 50 heigth = 50/></a>
     [![github](github.com/images/modules/contact/heartocat.png)](www.github.com)
 样例：
+
 <a href = "https://www.github.com"><img src = "https://github.com/images/modules/contact/heartocat.png" width = 50 heigth = 50/></a>
+
 [![github](https://github.com/images/modules/contact/heartocat.png)](www.github.com)
 
 ### 表格
@@ -307,29 +328,10 @@ __加粗__
         <td>85</td>
     </tr>
 </table>
-    |班级|学生数|平均成绩|
-    |:---:|:---:|:---:|
-    |一班|30|89|
-    |二班|35|85|
 
-<div align = "center">![img](./.img/MarkdownUse3HelloWorld.png)</div>
-![img](./.img/MarkdownUse3HelloWorld.png)
-<img src = "./.img/MarkdownUse3HelloWorld.png" width = 100 height = 100 align = >
 
-样例：
-[锚点](#i)
-<a href="https://www.www.baidu.com">baidu</a>
+|班级|学生数|平均成绩|
+|:---:|:---:|:---:|
+|一班|30|89|
+|二班|35|85|
 
-<del>wenjian</del>
-<s>del</s>
-<u>underlin</u>
-
-    <code>code</code>
-<br>
-<hr>
-<br>
-<ul>
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ul>
