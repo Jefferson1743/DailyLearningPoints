@@ -34,7 +34,7 @@
     注:
         单独标注出也可以使用``，例如：特别`标注`
 样例：
-<table><tr><td bgcolor = "pink" >denghuo </td></tr></table>
+<table><tr><td bgcolor = "pink" >我变色了 </td></tr></table>
 
 特别`标注`
 
