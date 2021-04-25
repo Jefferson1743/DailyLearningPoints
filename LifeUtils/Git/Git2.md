@@ -20,3 +20,8 @@
 1. ssh-keygen -t rsa -C 邮箱
 2. 进入~/.ssh/id_rsa.pub
 3. 复制公钥
+
+
+
+
+sdfsd 
