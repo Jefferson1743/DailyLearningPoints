@@ -30,11 +30,11 @@ Git分为四个部分：
 
     git status  查看工作去和暂存区的状态
     git add     将工作区的新建和修改提交到暂存区
-    git commit  
+    git commit  将暂存区的新建和修改提交到当前分支
         git commit -m "commit message" 文件名 将暂存区的文件提交到本地仓库(-m 可以避免进入vim，直接添加备注信息)
         git commit -am "commit message" 文件名  将工作区的文件直接提交到本地仓库
     git rm --cache 文件名   从暂存区中删除
-    git checkout 文件名 从缓存中删除旧文件的更新版本
+    git checkout 文件名 将暂存区中的文件覆盖工作区的文件
 
 ### 本地仓库的版本信息查询
 
@@ -82,6 +82,7 @@ Git分为四个部分：
             并行开发提高效率，分支开发失败对其他没有什么影响
             例如：master、feature_blue(独立开发的分支，成熟以后再合并)
     git checkout name   切换到相应的分支
+    git checkout -b name 创建name分支，并且切换到name分支
     git merge branchname    合并分支(首先要切换到主体分支，然后合并其他的分支， 分支冲突可以手动删除)
     git fetch 链接别名 分支名   获取分支的最新更新
         git log -p FETCH_HEAD   查看取回的数据
@@ -92,6 +93,7 @@ Git分为四个部分：
     git remote
         git remote add 别名 链接    为链接取别名
         git remote -v 查看本项目设置的所有链接的别名
+        git remote remove 别名  删除别名
     git push 链接别名 分支名    将本地仓库传输到远程仓库的相应分支
     git pull 链接别名 分支名    将远程仓库内的新版本更新到本地仓库
         git pull = git fetch + git merge
@@ -136,7 +138,4 @@ Git分为四个部分：
         start.[a, b, c] 忽略start.a, start.b, start.c 文件
         !start.c    不忽略start.c文件
 
-
-天降将大人于斯人也。
-
-必先苦其心志
+new branch 的测试数据
