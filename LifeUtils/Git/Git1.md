@@ -34,6 +34,11 @@ Git分为四个部分：
         git log --oneline   以优美的形式显示，每条日志信息只显示一条
     git reflog  显示日志，显示指针回退的步数
     git reset(hard)
+        git reset --hard:
+            在本地库移动HEAD指针
+            重置暂存区
+            重置工作区
+            如果只是在暂存区和工作区删除，并没有提交到本地库。可以使用git reset --hard HEAD
         git reset HEAD 局部索引值     回退到具体的局部索引
         git reset --hard HEAD~n     回退n步 
         git reset --hard HEAD^^^    回退三步
