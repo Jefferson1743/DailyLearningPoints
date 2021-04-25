@@ -23,3 +23,4 @@
         tftp -p -r B.txt -l A.txt ip 上传至ip，A.txt更名为B.txt
         tftp -gr A.txt ip
         tftp -pl A.txt ip
+    
