@@ -101,6 +101,26 @@ Git分为四个部分：
         git merge FETCH_HEAD    //将拉取下来的最新内容合并到当前所在的分支中
     git clone 链接名    把远程库完整地下载到本地，创建origin远程地址别名，初始化本地库
 
+## 保存现场
+
+    git stash
+        git stash   保存现场
+        git stash save "备注信息"    修改后工作区，使用git stash保存现场，git status 是clean状态
+        git stash list  查看存在哪些封存状态
+        git stash show stash@{num}  查看有哪些变化(摘要信息)
+        git stash show 默认查看第一个现场信息
+        git stash show stash@{num} -p   查看有哪些具体变化
+        git stash show stash -p 默认查看第一个版本的现场信息
+        git stash apply stash@{num} 恢复某一个版本的现场信息
+        git stash apply 默认恢复第一个现场信息
+        git stash pop stash@{num}   恢复某一个版本的现场信息
+        git stash pop   默认恢复第一个现场信息
+        git stash drop stash@{num}  删除某个版本的现场信息
+        git stash drop  默认删除第一个版本信息
+        git stash clear 删除所有的缓存的信息
+样例：
+
+[参考链接](https://www.cnblogs.com/zndxall/archive/2018/09/04/9586088.html)
 
 ## .gitignore文件
 简介：
