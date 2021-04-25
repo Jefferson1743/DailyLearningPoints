@@ -33,8 +33,8 @@ Git分为四个部分：
     git commit  
         git commit -m "commit message" 文件名 将暂存区的文件提交到本地仓库(-m 可以避免进入vim，直接添加备注信息)
         git commit -am "commit message" 文件名  将工作区的文件直接提交到本地仓库
-    git rm --cache 文件名   从缓存中删除
-    git checkout 文件名 从缓存中删除就文件的更新版本
+    git rm --cache 文件名   从暂存区中删除
+    git checkout 文件名 从缓存中删除旧文件的更新版本
 
 ### 本地仓库的版本信息查询
 
@@ -139,4 +139,4 @@ Git分为四个部分：
 
 天降将大人于斯人也。
 
-
+必先苦其心志
