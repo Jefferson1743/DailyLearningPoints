@@ -38,7 +38,7 @@ Git分为四个部分：
             在本地库移动HEAD指针
             重置暂存区
             重置工作区
-            如果只是在暂存区和工作区删除，并没有提交到本地库。可以使用git reset --hard HEAD
+            如果只是在暂存区和工作区删除，并没有提交到本地库。可以使用git reset --hard HEAD，回退到赏赐commit的版本
 
             
         git reset HEAD 局部索引值     回退到具体的局部索引
