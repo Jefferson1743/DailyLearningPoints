@@ -1,0 +1,53 @@
+第一次的内容：
+
+plt.figure()
+plt.imshow(x_train[0])
+plt.colorbar()
+plt.show()
+
+plt.figure(figsize=(10, 10))
+for i in range(25):
+    plt.subplot(5, 5, i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.imshow(x_train[i])
+    plt.xlabel(class_name[y_train[i]])
+plt.show()
+第二次内容：
+
+model = Sequential()
+model.summary()
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metric=['accracy'])
+model.fit(x_train, y_train, epochs=3, batch_size=10, verbose=1, validation_split=0.2)
+loss, acurracy = model.evaluate(x_test, y_test)
+pred = model.predict_classes(x_test)
+accu = accuracy_score(pred, y_test)
+
+y_pred = model.predict(x_test)
+print(y_pred[0], np.argmax(y_pred[0]))
+
+mat = confusion_matrix(y_test, pred)
+print(mat)
+第三次内容：
+x = dataset.drop(labels=['price'], axis=1)
+y = dataset['price']
+
+label = LabelEncoder()
+x['fuelType'] = lable.fit_transform(x['fuelType'])
+x = pd.get_dummies(x, drop_first=True, columns=['fuelType']
+
+plt.figure(figsize=(10, 10))
+plt.plot(history.history['accuracy']
+plt.plot(history.history['val_accuracy'])
+plt.title('LSTM')
+plt.xlabel('Accuracy')
+plt.ylable('Epoch')
+plt.legend(['Train', 'Test'], loc='upper right')
+plt.show()
+
+from sklearn.metric import accuracy_score 
+y_pred = model.predict_classes(x_test)
+accuracy_score(y_test, y_pred)
+
+
+
