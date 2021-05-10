@@ -18,7 +18,7 @@ pthread_exit(void *retval);
 
 
 
-pthread_join()  主线程等待tid线程结束
+pthread_join()  主线程等待tid线程结束。如果没有pthread_join，主程序会很快结束，从而创建的线程也会直接结束。添加pthread_join，等待线程结束后，主线程才会有机会结束。
 
 ```c
 pthread_join(pthread_t tid, void **retval);
