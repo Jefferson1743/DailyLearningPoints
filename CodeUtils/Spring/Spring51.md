@@ -55,3 +55,8 @@
 2. Spring提供IOC容器实现两种方式(两个接口)：
    1. BeanFactory:IOC容器的底层，框架内置的接口，不提倡开发人员使用；加载xml的时候，不会主动加载相应的类，会等到使用的时候才会加载。
    2. ApplicationContext:BeanFactory接口的子接口，提供更强大的功能，供开发人员使用，在加载解析xml文件的时候，就会主动加载相应的类。
+注：
+
+### IOC操作Bean管理
+1. 什么是Bean管理
+   + Bean管理的两个操作：Spring创建对象+Spring注入属性
