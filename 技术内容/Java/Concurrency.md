@@ -85,3 +85,22 @@
 ### volatile
 
 ### synchronized
+
+#### 对象的头部构成
+
++ Mark words
+```txt
+    mark words 里面包括
+```
++ 指针
+
+
+
+## Java内存模型
+
+Java内存模型主要分为四个部分：
++ Java内存模型的基础
++ Java内存模型中的顺序一致性
++ 同步原语
++ Java内存模型的设计
+### 

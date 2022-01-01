@@ -36,3 +36,20 @@
     7. git lfs ls-files ls所有track的文件
     8. git push
 
+## git local 和 remote 不一致
+
+问题：
+
+```shell
+To github.com:Jefferson1743/Daydreaming.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'git@github.com:Jefferson1743/Daydreaming.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+
+解决方法：
+    git pull --rebase origin master
