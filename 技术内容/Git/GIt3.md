@@ -53,3 +53,13 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 解决方法：
     git pull --rebase origin master
+
+
+## 本地尚未commit的内容
+
+问题：
+
+```shell
+error: Cannot pull with rebase: You have unstaged changes.
+error: Additionally, your index contains uncommitted changes.
+```
