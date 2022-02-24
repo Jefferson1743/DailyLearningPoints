@@ -135,9 +135,111 @@ SQL 语句通常由多个字句构成。有些子句是必须的，有些不是�
     SELECT * FROM TAB_NAME WHERE COL_NAME2 IN (2, 3, 18);
     //符合 COL_NAME2 在set(2, 3, 18) 中的数据。
 
+
+
     注：
         AND 和 OR 两者的优先级不一致，使用时候 AND > OR，避免系统发生错误解析，需要添加括号。
         IN 较 OR 有更高的执行效率、IN 可以包含 SELECT 子句、可读性更好、计算次序更好管理。
 
 ```
++ LIKE操作符号
+    - 通配符：用来匹配值的一部分的特殊符号
+    - 搜索模式：由字面值、通配符或者两者组合构成的搜索条件
+
+|操作符|含义|
+|:-:|:-|
+|%|代表零个或者多个字符，但是不能匹配NULL|
+|_|代表一个字符|
+
+```SQL
+
+    SELECT TAB_NAME.COL_NAME1 FROM TAB_NAME WHERE TAB_NAME.COL_NAME1 LIKE '% BOB ';
+    SELECT TAB_NAME.COK_NAME1 FROM TAB_NAME WHERE TAB_NAME.COL_NAME1 LIKE 'BOB_';
+
+    注：
+        使用通配符必须用LIKE关键字。
+        不能过度使用通配符，会造成性能下降
+        通配符放在最开始会造成性能下降最严重
+```
+
++ 正则表达式
+
+|操作符|含义|
+|:-:|:-|
+|.|匹配一个字符|
+|\||或者|
+|[]|匹配其中一个字符|
+|-|匹配某个范围的字符|
+
+
+```SQL
+    SELECT TAB_NAME.COL_NAME1 FROM TAB_NAME WHERE TAB_NAME.COL_NAME1 REGEXP '1000';
+    // 查询 COL_NAME1 字段包含 1000 的数据
+
+    SELECT TAB_NAME.COL_NAME1 FROM TAB_NAME WHERE TAB_NAME.COL_NAME1 REGEXP '^1000$'
+    // 查询 COL_NAME1 字段为 1000 的数据
+
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 REGEXP '.000';
+    // 查询 COL_NAME1 字段以 000 结尾的四位字符
+
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 REGEXP 'A|B';
+    // 查询 COL_NAME1 字段 为 A 或者 B 的情况
+
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 REGEXP '[1|2|3]'
+    // 查询 COL_NAME1 为 1 或者2 或者3 的情况
+
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 REGEXP '[A-Z]';
+    // 查询 COL_NAME1 在范围 A至Z。
+
+    注：
+        正则表达式如果没有定位符，则匹配字段中的内容
+        LIKE则是匹配整个字段。
+```
+
+转义符号：可以实现通配符等转义、元符号的转义
+|操作符|含义|
+|:-:|:-|
+|\\\\|转义字符(-、+、[、])|
+|\\\\\f|换页符|
+|\\\\n|换行|
+|\\\\r|回车|
+|\\\\t|制表|
+|\\\\v|纵向制表|
+
+```SQL
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 REGEXP '\\+';
+    // 查询COL_NAME1字段中包含+符号的数据。
+```
+
+匹配多个实例：
+|操作符|含义|
+|:-:|:-|
+|*|0个或者多个匹配|
+|?|0个或者1个匹配|
+|+|1个或者多个匹配|
+|{n}|n个匹配|
+|{n, }|至少n个匹配|
+|{n, m}|n到m个匹配|
+
+```SQL
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 REGEXP '\\([0-9] sticks?\\)'
+```
+
+定位符：
+|操作符|含义|
+|:-:|:-|
+|`^|字符开始|
+|$|字符结束|
+
+```SQL
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 REGEXP '^BOB$';
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 LIKE 'BOB';
+    SELECT * FROM TAB_NAME WHERE COL_NAME1 = 'BOB';
+
+    注：
+        正则表达式如果没有定位符，则匹配字段中的内容
+        LIKE则是匹配整个字段。
+```
+
+
 
