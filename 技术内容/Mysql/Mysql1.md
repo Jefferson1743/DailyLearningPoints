@@ -3,6 +3,7 @@
 ## TIPS
 
 + SQL语句都应该以分号结尾";"。
++ 日期通过Date进行存储。
 ## 常见关键字
 
 ### 使用数据库
@@ -240,6 +241,194 @@ SQL 语句通常由多个字句构成。有些子句是必须的，有些不是�
         正则表达式如果没有定位符，则匹配字段中的内容
         LIKE则是匹配整个字段。
 ```
+
+### 计算字段
+对查询的返回的数据进行格式化
+
++ 拼接字段
+
+Concat(file1, file2, ……, fileN)，fileN可以是常量。
+
++ 去空格
+
+Trim(COL_NAME)：删除字符串前后的空格
+RTrim(COL_NAME)：删除字符串右边的空格
+LTrim(COL_NAME)：删除字符串左边的空格
+
++ 四项运算
+
+|操作符|含义|
+|:-:|:-:|
+|+|COL_NAME2 + COL_NAME3|
+|-|COL_NAME2 - COL_NAME3|
+|*|COL_NAME2 * COL_NAME3|
+|/|COL_NAME2 / COL_NAME3|
+
++ 别名（Alias）
+AS：为字段取别名（字段可以是列表的原始的列，也可以是拼接字段等）
+
+
+
+```SQL
+    SELECT Concat('COL_NAME1:', RTrim(COL_NAME1), 'COL_NAME2', COL_NAME2) FROM TAB_NAME;
+
+    SELECT Concat(Trim(COL_NAME1), '(', COL_NAME2, ')') AS concat_col FROM TAB_NAME ORDER BY COL_NAME2;
+
+    SELECT COL_NAME2 * COL_NAME3 AS COL_NEW FROM TAB_NAME ORDER BY COL_NAME2;
+```
+### 函数
+
+函数的可移植性不佳，每个平台都自己的函数。以下内容是MYSQL的函数。
+
++ 字符串的处理函数
+
+|函数名|含义|
+|:-:|:-:|
+|LTrim()|删除字符左边的空格，并返回处理结果|
+|RTrim()|删除字符右边的空格，并返回处理结果|
+|Trim()|删除字符两边的空格，并返回处理结果|
+|Upper()|所有字符都转换为大写，并返回处理结果|
+|Lower()|所有字符都转换成小写，并返回处理结果|
+|Left()|返回字符串最左边的字符|
+|Right()|返回字符串最右边的字符|
+|Length()|返回字符串的长度|
+|Locate()|返回串的一个子串|
+|Soundex()|返回串的SOUNDEX的值|
+|SubString()|返回子串的字符|
+
+```SQL
+    SELECT * FROM TAB_NAME WHERE Soundex(COL_NAME) = Y.Lee;
+
+    注：
+        SOUNDEX是将文本串转换成语音表示的字母数字模式的算法。如 Soundex(Y.Lie) 转化后可以匹配 Y.Lee 
+
+
+```
+
++ 数字的处理函数
+
+|函数名|含义|
+|:-:|:-:|
+|Pi()|返回圆周率|
+|Rand()|返回一个随机数|
+|Sin()|返回正弦值|
+|Cos()|返回余弦值|
+|Tan()|返回正切值|
+|Abs()|返回一个绝对值|
+|Exp()|返回指数值|
+|Mod()|返回求模值|
+|Sqrt()|返回平方根|
+
++ 日期的处理函数
+
+在处理日期的数据时候，以日期的数据存储更能实现有效的索引和查询。
+
+
+### 聚合
+对数据进行聚合查询
+
+|函数|含义|说明|
+|:-:|:-|:-|
+|AVG()|返回平均值|不统计NULL|
+|COUNT()|返回条目数量|COUNT()不统计NULL，COUNT(*)统计NULL|
+|MAX()|返回最大值|不统计NULL|
+|MIN()|返回最小值|不统计NULL|
+|SUM()|返回和|不统计NULL|
+
+```SQL
+    SELECT COUNT(*) AS sample_num, MAX(COL_NAME1) AS col_max, MIN(COL_NAME2) AS col_min FROM TAB_NAME;
+
+    SELECT COUNT(DISTINCT(COL_NAME2)) AS col_count FROM TAB_NAME; 
+
+    注：
+        DISTINCT 不能使用在COUNT(*) 中。
+```
+
+### 数据分组
+GROUP BY …… HAVING：对查询数据进行分组操作，然后通过HAVING对分组进行条件筛选。
+
+GROUP BY 相关规定：
+
++ 可以实现通过嵌套分组实现数据的精细化展示
+
++ 嵌套分组在最后一个字段进行汇总；每个字段都会进行计算，展示在最后一个字段。
+
++ NULL 是被单独分为一组
+
++ GROUP BY 必须放在 WHERE 子句之后。
+
++ SELECT 中出现的字段都必须在 GROUP BY 中进行展示，聚合字段除外。（！！！）
+
+```SQL
+    SELECT * FROM TAB_NAME GROUP BY COL_NAME1;
+
+    SELECT COL_NAME1, COUNT(COL_NAME2) FROM TAB_NAME GROUP BY COL_NAME1;
+
+    SELECT COL_NAME1, COUNT(COL_NAME1) FROM TAB_NAME GROUP BY COL_NAME1 WITH ROLLUP;
+
+    SELECT COL_NAME1, COUNT(COL_NAME1) FROM TAB_NAME GROUP BY COL_NAME1 HAVING COUNT(*) >= 10;
+
+    SELECT COL_NAME1, SUM(COL_NAME2 * COL_NAME3) AS col_new FROM TAB_NAME GROUP BY COL_NAME1 HAVING COL_NAME > 10 ORDER BY col_new;
+
+    注：
+        WHERE：对每一条数据进行筛选，处理对象是每条数据。
+        HAVING：对分组内的数据进行筛选，处理对象是每个分组的数据。
+        WITH ROLLUP：可以在分组数据上再次进行统计。
+```
+
+### 子查询
+
++ 进行查询过滤
++ 嵌套子查询过多会造成性能下降
++ 子查询从内向外处理
++ 通常和 in 进行嵌套使用
+
+```SQL
+    SELECT * FROM TAB_NAME1 WHERE COL_NAME1 IN (
+        SELECT COL_NAME5 FROM TAB_NAME2
+    );
+
+    SELECT COL_NAME1, COL_NAME2, (
+        SELECT COUNT(TAB_NAME2.COL_NAME1) FROM TAB_NAME2 WHERE TAB_NAME.COL_NAME1 == TAB_NAME2.COL_NAME1
+    ) AS order FROM TAB_NAME ORDER BY TAB_NAME.COL_NAME1;
+```
+
+### 联结
+
++ 联结：多个表之间的一种逻辑关系。
++ 内联结：可以通过 WHERE 来实现，也可以通过 INNER JOIN 来实现。
++ 联结多个表：同时联结多个表会极大的损耗性能。
+
+```SQL
+    SELECT TAB_NAME1.COL_NAME1, TAB_NAME2.COL_NAME2 
+    FROM TAB_NAME1, TAB_NAME2 
+    WHERE  TAB_NAME1.COL_NAME1 = TAB_NAME.COL_NAME2;
+    //内部联结
+    //通过 WHERE 的条件关联，建立一种TAB_NAME 和 TAB_NAME2 两个之间的联结。
+
+    SELECT TAB_NAME.COL_NAME1, TAB_NAME2.COL_NAME2 FROM TAB_NAME 
+    INNER JOIN TAB_NAME2 ON TAB_NAME1.COL_NAME1 = TAB_NAME2;
+    //INNER JOIN 方式实现上一句
+
+    SELECT TAB_NAME.COL_NAME1, TAB_NAME2.COL_NAME2 
+    FROM TAB_NAME, TAB_NAME2;
+    //缺少 WHERE 条件，输出的结果是一个笛卡尔集合。
+
+    SELECT TAB_NAME1.COL_NAME1, 
+    (SELECT TAB_NAME2.COL_NAME2 FROM TAB_NAME2 WHERE TAB_NAME2.COL_NAME1 = TAB_NAME1.COL_NAME1),
+    (SELECT TAB_NAME3.COL_NAME3 FROM TAB_NAME2 WHERE TAB_NAME3.COL_NAME1 = TAB_NAME1.COL_NAME1),
+    FROM TAB_NAME1;
+
+    SELECT TAB_NAME1.COL_NAME1, TAB_NAME2.COL_NAME2, TAB_NAME3.COL_NAME3 FROM  
+
+    注：
+        使用子查询、联结查询的时候需要通过完全限定名，避免出现理解误差。
+        通过 WHERE 实现联结的时候，WHERE 条件对查询结果非常重要，如果缺失会造成笛卡尔积。
+
+```
+
+
+
 
 
 
