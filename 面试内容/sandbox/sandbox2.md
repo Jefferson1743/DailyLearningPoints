@@ -1,17 +1,22 @@
-# Sandbox
+# sandbox使用
 ## 运行
 
 1. 通过脚本安装的方式监听对应的进程
+
 ```shell
 ./sandbox.sh -p 33342
 ```
+
 2. 通过agent方式进行挂在
+
 ```shell
 java test.class -javaagent:/opt/sandbox/lib/sandbox-agent.jar
 
 注： javaagent方式可以确保sandbox代码在应用代码加载之前完成载入，避免引起目标JVM full GC。
 ```
+
 ## 事件介绍
+
 BEFORE事件：执行方法体之前被调用
 RETURN事件：执行方法体返回之前调用
 THROWS事件：执行方法体抛出一场之前调用
