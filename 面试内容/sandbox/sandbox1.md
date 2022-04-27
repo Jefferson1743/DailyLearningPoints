@@ -102,14 +102,30 @@ try {
 
 沙箱通过自定义的SandboxClassLoader破坏了双亲委派的约定，实现了和目标应用的类隔离。所以不用担心加载沙箱会引起应用的类污染、冲突。各模块之间类通过ModuleJarClassLoader实现了各自的独立，达到模块之间、模块和沙箱之间、模块和应用之间互不干扰。
 
-![jvm-sandbox-classloader](https://github.com/alibaba/jvm-sandbox/wiki/img/jvm-sandbox-classloader.png)
+![jvm-sandbox-classloader](./.img/jvm-sandbox-classloader.png)
 
 ### 类增强策略
 
 沙箱通过在BootstrapClassLoader中埋藏的Spy类完成目标类和沙箱内核的通讯
 
-![jvm-sandbox-enhance-class](https://github.com/alibaba/jvm-sandbox/wiki/img/jvm-sandbox-enhance-class.jpg)
+![jvm-sandbox-enhance-class](./.img/jvm-sandbox-enhance-class.jpg)
 
 ### 整体架构
 
-![jvm-sandbox-architecture](https://github.com/alibaba/jvm-sandbox/wiki/img/jvm-sandbox-architecture.png)
+![jvm-sandbox-architecture](./.img/jvm-sandbox-architecture.png)
+
+## 运行
+
+1. 通过脚本安装的方式监听对应的进程
+
+```shell
+./sandbox.sh -p 33342
+```
+
+2. 通过agent方式进行挂在
+
+```shell
+java test.class -javaagent:/opt/sandbox/lib/sandbox-agent.jar
+
+注： javaagent方式可以确保sandbox代码在应用代码加载之前完成载入，避免引起目标JVM full GC。
+```
