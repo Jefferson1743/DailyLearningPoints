@@ -1,9 +1,13 @@
 # 好记性不如烂笔头
 [toc]
 ## [Tech Module](./Tech/)
-### [Java](./Tech/Java/)
-[Java](./Tech/Java/)
-
+### Java
+[Java](./Tech/Java/) 包括三个方面：
+1. 常见的基础知识及面试点
+2. Java 常见问题
+3. JVM 的内部实现原理
+4. Java 并发编程
+5. Java常见框架和容器的工作机制
 
 ### [Git](./Tech/Git/)
 
